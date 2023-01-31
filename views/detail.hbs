@@ -1,0 +1,14 @@
+<button style="border-radius: 25px; background-color: rgb(68, 74, 113); width: 100px;"><a href="/movies" style="text-decoration: none; color: white;">Go back</a></button>
+<img src="{{ movie.image }}">
+<h1>{{ movie.title }}</h1>
+<h3>{{ movie.director }}</h3>
+<h5>Stars</h5>
+<ul>
+    {{#each movie.stars as |star|}}
+        <li>{{ star }}</li>
+    {{/each}}
+<ul>
+<p>{{ movie.description }}</p>
+    {{#each movie.showtimes as |showtime|}}
+        {{ showtime }} | 
+    {{/each}}

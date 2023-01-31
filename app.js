@@ -1,34 +1,28 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
-require('dotenv/config');
+require('dotenv').config();
 
-// ℹ️ Connects to the database
-require('./db');
-
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
+//Declaration of an express application
 const express = require('express');
+const logger = require('morgan');
 
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
-const hbs = require('hbs');
+//Here we execute the file where mongoose is configured
+require('./config/db.config');
 
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most middlewares
-require('./config')(app);
+//Integration of the views in our application.
+app.set('view engine', 'hbs');
+app.set('views', `${__dirname}/views`);
 
-// default value for title local
-const projectName = 'lab-express-cinema';
-const capitalized = string => string[0].toUpperCase() + string.slice(1).toLowerCase();
+//Middleware
 
-app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
+//Morgan shows us the logs of our application
+//That 'dev' specifies how Morgan will show the traces, it has nothing to do with the 'dev' of our scripts
+app.use(logger('dev'));
 
-// 👇 Start handling routes here
-const index = require('./routes/index');
-app.use('/', index);
+//Here we attach our route file.
+const routes = require('./config/routes.config');
+app.use('/', routes);
 
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-require('./error-handling')(app);
-
-module.exports = app;
+//Assignment of port 3000 to our app.
+const port = 3000;
+app.listen(port, () => console.log(`Application running in port ${port}`));
