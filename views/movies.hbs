@@ -1,6 +1,7 @@
-<button style="border-radius: 25px; background-color: rgb(68, 74, 113); width: 100px;"><a href="/" style="text-decoration: none; color: white;">Go home</a></button>
-{{#each movies as |movie|}}
-    <img src="{{movie.image}}" alt="" width="50px">
-    <h1>{{ movie.title }}</h1>
-    <a href="/movies/{{movie._id}}">See more</a>
-{{/each}}
+<div class="list-container">
+    {{#each movies as |movie|}}
+        <img src="{{movie.image}}">
+        <h1>{{ movie.title }}</h1>
+        <a href="/movies/{{movie._id}}">See more</a>
+    {{/each}}
+</div>
