@@ -65,7 +65,14 @@
 
 .list-container {
     display: grid;
-    grid-template-columns: repeat(2, 3fr);
+    grid-template-columns: repeat(6, 3fr);
     gap: 1rem;
     place-items: center;
+}
+
+.detail-container {
+        display: grid;
+        grid-template-columns: repeat(1, 3fr);
+        gap: 1rem;
+        place-items: center;
 }
